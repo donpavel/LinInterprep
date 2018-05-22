@@ -1,0 +1,43 @@
+LINUX KERNEL UPGRADE
+
+Linux Patch Management, Server Hardening, or Secure the Server
+To patch the linux server, you are either fixing the bugs, securing the OS and upgrading to the latest version. So we are either patching the OS or Patching the Kernel.
+OS patching. 
+#lsb_release –a, #cat /etc/*release  or #cat /etc/isuue*  (to check the current OS before updating it)
+#yum update –y
+#lsb_release –a   (to verify the latest version updated)
+
+Patching the Kernel,
+#uname –r  or uname –a   (to check the kernel version before updating a new one)
+#yum install (packagename)   ( Installing a package). Installing a couple of packages for the complete kernel upgrade, you would do, step by step:
+#uname –r   or   uname –a  
+Go to www.kernel.org to get the latest version or you’re your company’s repository to copy the url.
+#wget    (Paste the just copied url after wget in your linux server)
+Untar It  by :
+#ls  (to verify the package)
+#tar –xvf (package name)
+#ll (to see the extracted package without the tar.xz)
+#cd  (into the package)
+#ll  again to see all the packages that where compressed in the .tar.xz package)
+
+Install dependency   (yum can install many packages at the same time but you just need to put a space between them)
+
+#yum groupinstall “Development Tools”
+
+#yum install openssl*
+#yum install libncurses5-dev –y
+# yum install ncurses-devel –y
+#yum install gcc*
+#yum install elfutils-libelf-devel -y
+
+#make menuconfig   Or  #make defconfig (The make menuconfig.  will bring up an interphase where u can check and uncheck what you want or do not want using the space bar and the arrow keys.  At your job they will tell you what you need to check or uncheck there and make the changes on the kernel module and save it. It will generate the .config file which contains all the changes to the kernel. The other option #make defconfig  is mostly used when you don’t want to make any changes to the configuration. Its  the default setting. 
+If you don’t have any changes to make, you can. 
+#make 
+#make modules   (will compile the modules) 
+#make modules_install   (install the module driver)
+#make install   (will create the module in the GRUB, create a mapper to communicate with the hardware)
+#reboot and choose the new kernel on grub at bootup
+Or to set the new kernel as default, you can go into the file /boot/grub/grub.conf and default =0
+This will automatically pick the new kernel at boot up.
+#uname –r  (to verify the new kernel)
+#echo “Linuxpassword” | passwd  stdin linuxuser
